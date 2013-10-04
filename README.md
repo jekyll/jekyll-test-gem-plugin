@@ -1,4 +1,4 @@
-# JekyllTest
+# JekyllTestPlugin
 
 Testing Jekyll's `gem` configuration option, which allows the straight
 inclusion of plguins as rubygems into Jekyll instead of just `.rb`
@@ -8,7 +8,7 @@ files.
 
 Add this line to your application's Gemfile:
 
-    gem 'jekyll_test'
+    gem 'jekyll_test_plugin'
 
 And then execute:
 
@@ -16,7 +16,7 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install jekyll_test
+    $ gem install jekyll_test_plugin
 
 ## Usage
 

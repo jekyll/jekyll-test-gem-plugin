@@ -1,11 +1,11 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'jekyll_test/version'
+require 'jekyll_test_plugin/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "jekyll_test"
-  spec.version       = JekyllTest::VERSION
+  spec.name          = "jekyll_test_plugin"
+  spec.version       = JekyllTestPlugin::VERSION
   spec.authors       = ["Parker Moore"]
   spec.email         = ["parkrmoore@gmail.com"]
   spec.description   = %q{A test plugin for Jekyll's proposed new 'gem' config option}

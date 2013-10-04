@@ -1,7 +1,7 @@
-require "jekyll_test/version"
+require "jekyll_test_plugin/version"
 require "jekyll"
 
-module JekyllTest
+module JekyllTestPlugin
   class TestPage < Jekyll::Page
     def initialize(site, base, dir, name)
       @site = site

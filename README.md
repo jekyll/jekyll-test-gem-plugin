@@ -1,6 +1,8 @@
 # JekyllTest
 
-TODO: Write a gem description
+Testing Jekyll's `gem` configuration option, which allows the straight
+inclusion of plguins as rubygems into Jekyll instead of just `.rb`
+files.
 
 ## Installation
 
@@ -18,7 +20,7 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+DON'T USE THIS IT'S JUST FOR TESTING. :)
 
 ## Contributing
 

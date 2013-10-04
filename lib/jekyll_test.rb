@@ -15,7 +15,7 @@ module JekyllTest
 
   class TestGenerator < Jekyll::Generator
     def generate(site)
-      site.pages << Page.new(site, site.source, '', 'test.txt')
+      site.pages << TestPage.new(site, site.source, '', 'test.txt')
     end
   end
 end

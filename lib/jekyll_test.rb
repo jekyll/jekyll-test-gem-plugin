@@ -10,6 +10,7 @@ module JekyllTest
       @name = name
       self.process(name)
       self.content = "this is a test"
+      self.data = {}
     end
   end
 

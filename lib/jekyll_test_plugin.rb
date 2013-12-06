@@ -15,6 +15,8 @@ module JekyllTestPlugin
   end
 
   class TestGenerator < Jekyll::Generator
+    safe true
+
     def generate(site)
       site.pages << TestPage.new(site, site.source, '', 'test.txt')
     end

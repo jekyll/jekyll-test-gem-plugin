@@ -8,7 +8,7 @@ Gem::Specification.new do |spec|
   spec.version       = JekyllTestPlugin::VERSION
   spec.authors       = ["Parker Moore"]
   spec.email         = ["parkrmoore@gmail.com"]
-  spec.description   = %q{A test plugin for Jekyll's proposed new 'gem' config option}
+  spec.description   = %q{A test plugin for Jekyll's 'gem' config option}
   spec.summary       = %q{A test Jekyll plugin as a gem}
   spec.homepage      = "https://github.com/parkr/jekyll-test-gem-plugin"
   spec.license       = "MIT"

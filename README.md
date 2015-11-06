@@ -1,7 +1,7 @@
 # JekyllTestPlugin
 
 Testing Jekyll's `gem` configuration option, which allows the straight
-inclusion of plguins as rubygems into Jekyll instead of just `.rb`
+inclusion of plugins as rubygems into Jekyll instead of just `.rb`
 files.
 
 ## Installation

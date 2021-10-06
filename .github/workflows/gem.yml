@@ -1,0 +1,22 @@
+name: Gem Tasks
+
+on:
+  push:
+
+jobs:
+  gem_build:
+    name: "Build Gem (Ruby ${{ matrix.ruby_version }})"
+    runs-on: "ubuntu-latest"
+    strategy:
+      fail-fast: true
+      matrix:
+        ruby_version:
+          - 2.7
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+      - name: "Set up Ruby ${{ matrix.ruby_version }}"
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.ruby_version }}
+          bundler-cache: true

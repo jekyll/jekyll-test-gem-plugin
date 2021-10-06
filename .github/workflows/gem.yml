@@ -4,10 +4,10 @@ on:
   push:
     branches:
       - master
+      - gem-tasks-workflow # FIXME: Remove before merge
       - "*-stable"
     tags:
       - "v*"
-  pull_request: # FIXME: Remove before merge
 
 jobs:
   gem_build:

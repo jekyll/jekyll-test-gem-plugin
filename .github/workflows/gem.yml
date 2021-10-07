@@ -2,9 +2,15 @@ name: Gem Tasks
 
 on:
   push:
+    branches:
+      - master
+      - "*-stable"
+    tags:
+      - "v*"
 
 jobs:
   gem_build:
+    if: "github.repository_owner == 'jekyll' && startsWith(github.event.commits[0].message, 'Release :gem:')"
     name: "Build Gem (Ruby ${{ matrix.ruby_version }})"
     runs-on: "ubuntu-latest"
     strategy:
@@ -20,3 +26,15 @@ jobs:
         with:
           ruby-version: ${{ matrix.ruby_version }}
           bundler-cache: true
+      - name: Extract Plugin Version
+        id: plugin-meta
+        run: echo "::set-output name=version::$(bundle exec ruby -e 'require "jekyll_test_plugin"; puts JekyllTestPlugin::VERSION')"
+        shell: bash
+      - name: "Build Gem (JekyllTestPlugin ${{ steps.plugin-meta.outputs.version }})"
+        run: gem build jekyll_test_plugin.gemspec
+      - name: Archive gem as artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: "jekyll_test_plugin-${{ steps.plugin-meta.outputs.version }}"
+          path: "jekyll_test_plugin-${{ steps.plugin-meta.outputs.version }}.gem"
+          retention-days: 5

@@ -3,7 +3,7 @@
 require "colorator"
 require "json"
 
-data = JSON.parse(ARGV[0])
+data = JSON.parse(ENV["EVENT_JSON"])
 label = %Q(TAG #{data["ref"].delete_prefix("refs/tags/").cyan})
 puts <<-TEXT
 

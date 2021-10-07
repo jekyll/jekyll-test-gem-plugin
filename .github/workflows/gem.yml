@@ -28,7 +28,9 @@ jobs:
         run: echo "::set-output name=version::$(bundle exec ruby -e 'require "jekyll_test_plugin"; puts JekyllTestPlugin::VERSION')"
         shell: bash
       - name: Tag Details
-        run: bundle exec ruby .github/workflows/scripts/tag_info.rb ${{ toJSON(github.event) }}
+        env:
+          EVENT_JSON: ${{ toJSON(github.event) }}
+        run: bundle exec ruby .github/workflows/scripts/tag_info.rb
       - name: "Build Gem (JekyllTestPlugin ${{ steps.plugin-meta.outputs.version }})"
         run: gem build jekyll_test_plugin.gemspec
       - name: Archive gem as artifact

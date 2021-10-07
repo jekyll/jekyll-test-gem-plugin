@@ -35,3 +35,7 @@ jobs:
           name: "jekyll_test_plugin-${{ steps.plugin-meta.outputs.version }}"
           path: "jekyll_test_plugin-${{ steps.plugin-meta.outputs.version }}.gem"
           retention-days: 5
+      - name: Release Gem via Rubygems.org
+        env:
+          GEM_HOST_API_KEY: ${{ secrets.RUBYGEMS_GEM_PUSH_API_KEY }}
+        run: "gem push jekyll_test_plugin-${{ steps.plugin-meta.outputs.version }}.gem"

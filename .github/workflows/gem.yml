@@ -2,12 +2,12 @@ name: Gem Tasks
 
 on:
   push:
-    branches: ["master"]
     tags:
       - "v*"
 
 jobs:
   gem_build:
+    if: "github.repository_owner == 'jekyll' && startsWith(github.event.head_commit.message, 'Release :gem:')"
     name: "Build Gem (Ruby ${{ matrix.ruby_version }})"
     runs-on: "ubuntu-latest"
     strategy:
@@ -23,8 +23,6 @@ jobs:
         with:
           ruby-version: ${{ matrix.ruby_version }}
           bundler-cache: true
-      - name: Inspect workflow context
-        run: "${{ github.event.head_commit.message }}"
       - name: Extract Plugin Version
         id: plugin-meta
         run: echo "::set-output name=version::$(bundle exec ruby -e 'require "jekyll_test_plugin"; puts JekyllTestPlugin::VERSION')"

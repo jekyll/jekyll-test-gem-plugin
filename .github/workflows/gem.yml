@@ -10,7 +10,6 @@ on:
 
 jobs:
   gem_build:
-    if: "github.repository_owner == 'jekyll' && startsWith(github.event.commits[0].message, 'Release :gem:')"
     name: "Build Gem (Ruby ${{ matrix.ruby_version }})"
     runs-on: "ubuntu-latest"
     strategy:

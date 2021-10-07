@@ -1,4 +1,4 @@
-name: Gem Tasks
+name: Release Gem
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
       - "v*"
 
 jobs:
-  gem_build:
+  release:
     if: "github.repository_owner == 'jekyll' && startsWith(github.event.head_commit.message, 'Release :gem:')"
     name: "Build Gem (Ruby ${{ matrix.ruby_version }})"
     runs-on: "ubuntu-latest"
@@ -27,6 +27,10 @@ jobs:
         id: plugin-meta
         run: echo "::set-output name=version::$(bundle exec ruby -e 'require "jekyll_test_plugin"; puts JekyllTestPlugin::VERSION')"
         shell: bash
+      - name: Tag Details
+        run: |
+          echo ${{ toJSON(github.event) }} > event.json
+          bundle exec ruby .github/workflows/scripts/tag_info.rb
       - name: "Build Gem (JekyllTestPlugin ${{ steps.plugin-meta.outputs.version }})"
         run: gem build jekyll_test_plugin.gemspec
       - name: Archive gem as artifact

@@ -10,11 +10,8 @@ puts <<-TEXT
   ---------------------------------------------------------
   #{label.center(64)}
   ---------------------------------------------------------
-
-
       Pushed by: #{data.dig("pusher", "name")&.cyan}
      Repository: #{data.dig("repository", "full_name")&.cyan}
-
 
     Head Commit Details:
 
@@ -23,6 +20,5 @@ puts <<-TEXT
          Author: #{data.dig("head_commit", "author", "username")&.cyan}
       Committer: #{data.dig("head_commit", "committer", "username")&.cyan}
          SHA ID: #{data.dig("head_commit", "id")&.cyan}
-
   ---------------------------------------------------------
 TEXT

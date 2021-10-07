@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - master
-      - gem-tasks-workflow # FIXME: Remove before merge
       - "*-stable"
     tags:
       - "v*"

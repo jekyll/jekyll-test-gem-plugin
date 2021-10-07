@@ -25,6 +25,8 @@ jobs:
         with:
           ruby-version: ${{ matrix.ruby_version }}
           bundler-cache: true
+      - name: Inspect workflow context
+        run: echo ${{ toJSON(github.event) }}
       - name: Extract Plugin Version
         id: plugin-meta
         run: echo "::set-output name=version::$(bundle exec ruby -e 'require "jekyll_test_plugin"; puts JekyllTestPlugin::VERSION')"

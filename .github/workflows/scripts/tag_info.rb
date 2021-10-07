@@ -3,7 +3,7 @@
 require "colorator"
 require "json"
 
-data = JSON.parse(File.binread('event.json'))
+data = JSON.parse(ARGV[0])
 label = %Q(TAG #{data["ref"].delete_prefix("refs/tags/").cyan})
 puts <<-TEXT
 

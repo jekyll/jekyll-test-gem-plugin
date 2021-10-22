@@ -2,12 +2,14 @@ name: Release Gem
 
 on:
   push:
-    tags:
-      - "v*"
+    branches:
+      - master
+    paths:
+      - "lib/**/version.rb"
 
 jobs:
   release:
-    if: "github.repository_owner == 'jekyll' && startsWith(github.event.head_commit.message, 'Release :gem:')"
+    if: "github.repository_owner == 'jekyll'"
     name: "Release Gem (Ruby ${{ matrix.ruby_version }})"
     runs-on: "ubuntu-latest"
     strategy:
@@ -25,21 +27,23 @@ jobs:
           bundler-cache: true
       - name: Extract Plugin Version
         id: plugin-meta
-        run: echo "::set-output name=version::$(bundle exec ruby -e 'require "jekyll_test_plugin"; puts JekyllTestPlugin::VERSION')"
+        run: |
+          echo "::set-output name=tag_version::$(bundle exec rake project:tag_version)"
+          echo "::set-output name=gem_name::$(bundle exec rake project:gem_name)"
         shell: bash
-      - name: Tag Details
-        env:
-          EVENT_JSON: ${{ toJSON(github.event) }}
-        run: bundle exec ruby .github/workflows/scripts/tag_info.rb
-      - name: "Build Gem (JekyllTestPlugin ${{ steps.plugin-meta.outputs.version }})"
-        run: gem build jekyll_test_plugin.gemspec
+      - name: "Build Gem (${{ steps.plugin-meta.outputs.gem_name }})"
+        run: bundle exec rake build
       - name: Archive gem as artifact
         uses: actions/upload-artifact@v2
         with:
-          name: "jekyll_test_plugin-${{ steps.plugin-meta.outputs.version }}"
-          path: "jekyll_test_plugin-${{ steps.plugin-meta.outputs.version }}.gem"
+          name: "${{ steps.plugin-meta.outputs.gem_name }}"
+          path: "pkg/${{ steps.plugin-meta.outputs.gem_name }}.gem"
           retention-days: 5
       - name: Release Gem via Rubygems.org
         env:
           GEM_HOST_API_KEY: ${{ secrets.RUBYGEMS_GEM_PUSH_API_KEY }}
-        run: "gem push jekyll_test_plugin-${{ steps.plugin-meta.outputs.version }}.gem"
+        run: |
+          git config user.name "${{ github.actor }}"
+          git config user.email "${{ github.actor }}@users.noreply.github.com"
+          git tag ${{ steps.plugin-meta.outputs.tag_version }} -m "Release :gem: ${{ steps.plugin-meta.outputs.tag_version }}"
+          git push origin ${{ steps.plugin-meta.outputs.tag_version }}

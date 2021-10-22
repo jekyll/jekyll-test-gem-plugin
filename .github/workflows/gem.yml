@@ -47,3 +47,4 @@ jobs:
           git config user.email "${{ github.actor }}@users.noreply.github.com"
           git tag ${{ steps.plugin-meta.outputs.tag_version }} -m "Release :gem: ${{ steps.plugin-meta.outputs.tag_version }}"
           git push origin ${{ steps.plugin-meta.outputs.tag_version }}
+          gem push pkg/${{ steps.plugin-meta.outputs.gem_name }}.gem

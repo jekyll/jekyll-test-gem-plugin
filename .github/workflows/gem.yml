@@ -25,26 +25,9 @@ jobs:
         with:
           ruby-version: ${{ matrix.ruby_version }}
           bundler-cache: true
-      - name: Extract Plugin Version
-        id: plugin-meta
-        run: |
-          echo "::set-output name=tag_version::$(bundle exec rake project:tag_version)"
-          echo "::set-output name=gem_name::$(bundle exec rake project:gem_name)"
-        shell: bash
-      - name: "Build Gem (${{ steps.plugin-meta.outputs.gem_name }})"
-        run: bundle exec rake build
-      - name: Archive gem as artifact
-        uses: actions/upload-artifact@v2
+      - name: Build and Publish Gem
+        uses: ashmaroli/release-gem@dist
         with:
-          name: "${{ steps.plugin-meta.outputs.gem_name }}"
-          path: "pkg/${{ steps.plugin-meta.outputs.gem_name }}.gem"
-          retention-days: 5
-      - name: Release Gem via Rubygems.org
+          gemspec_name: jekyll_test_plugin
         env:
           GEM_HOST_API_KEY: ${{ secrets.RUBYGEMS_GEM_PUSH_API_KEY }}
-        run: |
-          git config user.name "${{ github.actor }}"
-          git config user.email "${{ github.actor }}@users.noreply.github.com"
-          git tag ${{ steps.plugin-meta.outputs.tag_version }} -m "Release :gem: ${{ steps.plugin-meta.outputs.tag_version }}"
-          git push origin ${{ steps.plugin-meta.outputs.tag_version }}
-          gem push pkg/${{ steps.plugin-meta.outputs.gem_name }}.gem

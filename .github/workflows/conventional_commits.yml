@@ -1,0 +1,34 @@
+name: Enforce Conventional Commits
+
+permissions:
+  pull-requests: read
+
+on:
+  pull_request_target:
+    types: [opened, edited, synchronize, reopened, ready_for_review]
+    branches:
+      - master
+      - main
+
+jobs:
+  enforce-conventional-commits:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Lint Conventional Commit Usage
+        uses: amannn/action-semantic-pull-request@0723387faaf9b38adef4775cd42cfd5155ed6017
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          types: |
+            build
+            chore
+            ci
+            docs
+            feat
+            fix
+            perf
+            refactor
+            revert
+            style
+            test
+          requireScope: false

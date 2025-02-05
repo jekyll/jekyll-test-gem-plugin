@@ -20,7 +20,7 @@ Or install it yourself as:
 
 ## Usage
 
-DON'T USE THIS IT'S JUST FOR TESTING. :)
+DON'T USE THIS IT'S JUST FOR TESTING. :smile:
 
 ## Contributing
 

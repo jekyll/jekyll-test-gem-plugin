@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.3.1](https://github.com/jekyll/jekyll-test-gem-plugin/compare/v0.3.0...v0.3.1) (2026-03-30)
+
+
+### Bug Fixes
+
+* update release workflow name ([#10](https://github.com/jekyll/jekyll-test-gem-plugin/issues/10)) ([f120f78](https://github.com/jekyll/jekyll-test-gem-plugin/commit/f120f78b043bfb655b599903582b9a374300ddea))
+* update workflow names ([#9](https://github.com/jekyll/jekyll-test-gem-plugin/issues/9)) ([b19352b](https://github.com/jekyll/jekyll-test-gem-plugin/commit/b19352b29833855bc67f50ff03943539d347fa80))
+
 ## [0.3.0](https://github.com/jekyll/jekyll-test-gem-plugin/compare/v0.2.0...v0.3.0) (2025-02-05)
 
 
